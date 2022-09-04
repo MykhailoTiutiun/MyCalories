@@ -42,7 +42,7 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userRepository.findByEmail(email).get();
+        return getUserByEmail(email).get();
     }
 
     public void saveUser(User user){
