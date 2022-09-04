@@ -22,7 +22,9 @@ public class PersistenceTest {
 
     @Test
     public void userPersitenceTest(){
-        User testUser = userRepository.save(new User(10L, "TestUser", "TestEmail", "TestPassword"));
+        User testUser = new User("TestUser", "TestEmail", "TestPassword");
+        testUser.setId(10L);
+        userRepository.save(testUser);
         Assert.assertNotNull(userRepository.findById(10L).get());
         userRepository.delete(testUser);
     }
