@@ -1,7 +1,9 @@
 package com.mykhailotiutiun.mycalories;
 
+import com.mykhailotiutiun.mycalories.persistence.entities.Diet;
 import com.mykhailotiutiun.mycalories.persistence.entities.Role;
 import com.mykhailotiutiun.mycalories.persistence.entities.User;
+import com.mykhailotiutiun.mycalories.persistence.repositories.DietRepository;
 import com.mykhailotiutiun.mycalories.persistence.repositories.RoleRepository;
 import com.mykhailotiutiun.mycalories.persistence.repositories.UserRepository;
 import org.junit.Assert;
@@ -19,6 +21,8 @@ public class PersistenceTest {
     UserRepository userRepository;
     @Autowired
     RoleRepository roleRepository;
+    @Autowired
+    DietRepository dietRepository;
 
     @Test
     public void userPersitenceTest(){
@@ -34,5 +38,19 @@ public class PersistenceTest {
         Role testRole = roleRepository.save(new Role(10L, "TestName"));
         Assert.assertNotNull(roleRepository.findById(10L).get());
         roleRepository.delete(testRole);
+    }
+
+    @Test
+    public void dietPersistenceTest(){
+        User testUser = new User("TestUser", "TestEmail", "TestPassword");
+        testUser.setId(10L);
+        userRepository.save(testUser);
+        Diet testDiet = new Diet(testUser.getId(), testUser);
+        testDiet.setDailyParams(10,10,10,10);
+        dietRepository.save(testDiet);
+        Assert.assertNotNull(dietRepository.findById(testDiet.getId()).get().getDailyCalories());
+        Assert.assertNotNull(dietRepository.findByUser(testUser).get().getDailyCalories());
+        dietRepository.delete(testDiet);
+        userRepository.delete(testUser);
     }
 }

@@ -29,7 +29,7 @@
     </licenses>
 
     <properties>
-        <java.version>18</java.version>
+        <java.version>17</java.version>
     </properties>
 
     <dependencies>
@@ -103,6 +103,8 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <finalName>MyCalories</finalName>
+
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>

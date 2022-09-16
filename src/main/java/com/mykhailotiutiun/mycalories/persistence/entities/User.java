@@ -24,6 +24,10 @@ public class User implements UserDetails {
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
+    @Transient
+    @OneToOne(mappedBy = "user")
+    @ToString.Exclude
+    private Diet diet;
 
     public User() {
     }
