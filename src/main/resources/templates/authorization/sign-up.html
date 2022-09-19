@@ -7,7 +7,7 @@
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
-<body>
+<body style="background-color: lightgray">
 <div class="container">
     <form class="form-signup" method="post" th:action="@{/sign-up}" th:object="${userDto}">
         <h2 class="form-signin-heading">Sign up</h2>
@@ -26,6 +26,12 @@
         <p>
             <label for="passwordConfirm" class="sr-only">Confirm Password</label>
             <input type="password" id="passwordConfirm" name="passwordConfirm" class="form-control" placeholder="Confirm Password" th:field="*{passwordConfirm}">
+        </p>
+        <p th:if="${param.invalidDataError}" class="alert alert-danger">
+            <span>Invalid data</span>
+        </p>
+        <p th:if="${param.passwordMatchError}" class="alert alert-danger">
+            <span>Passwords aren't match</span>
         </p>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
     </form>
