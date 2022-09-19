@@ -1,9 +1,9 @@
 package com.mykhailotiutiun.mycalories.persistence.dto;
 
+import com.mykhailotiutiun.mycalories.persistence.entities.Role;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -19,11 +19,23 @@ public class UserDto implements Serializable {
     private String email;
     @Size(min = 8)
     private String password;
-    @Size(min = 8)
     private String passwordConfirm;
-    private Set<RoleDto> roles;
+    private Set<Role> roles;
+
+    private DetailsDto details;
+
+    private DietDto diet;
 
     public UserDto() {
     }
 
+    public UserDto(Long id, String name, String email, String password, Set<Role> roles, DetailsDto details, DietDto diet) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+        this.details = details;
+        this.diet = diet;
+    }
 }

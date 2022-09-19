@@ -1,9 +1,8 @@
 package com.mykhailotiutiun.mycalories.web.controller;
 
+import com.mykhailotiutiun.mycalories.persistence.dto.DtoConverter;
 import com.mykhailotiutiun.mycalories.persistence.dto.UserDto;
-import com.mykhailotiutiun.mycalories.persistence.entities.User;
 import com.mykhailotiutiun.mycalories.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,27 +25,25 @@ public class AuthorzationController {
 
     @GetMapping("/sign-in")
     public String signInPage(){
-        return "authorization/sign-in.html";
+        return "authorization/sign-in";
     }
 
     @GetMapping("/sign-up")
     public String signUpPage(Model model){
         model.addAttribute("userDto", new UserDto());
-        return "authorization/sign-up.html";
+        return "authorization/sign-up";
     }
 
     @PostMapping("/sign-up")
-    public String createUser(@ModelAttribute @Valid UserDto userDto, BindingResult result) throws Exception {
+    public String createUser(@ModelAttribute @Valid UserDto userDto, BindingResult result) {
         if(result.hasErrors()){
-            throw new Exception("Register Exception");
+            return "redirect:/sign-up?invalidDataError";
         } else if (!userDto.getPassword().equals(userDto.getPasswordConfirm())) {
-            throw new Exception("Passwords are different");
+            return "redirect:/sign-up?passwordMatchError";
         }
-        userService.saveUser(userDtoToUser(userDto));
+        userService.createUser(DtoConverter.userFromUserDto(userDto));
         return "redirect:/sign-in";
     }
 
-    private User userDtoToUser(UserDto userDto){
-        return new User(userDto.getName(), userDto.getEmail(), userDto.getPassword());
-    }
+
 }

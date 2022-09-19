@@ -40,17 +40,17 @@ public class PersistenceTest {
         roleRepository.delete(testRole);
     }
 
-    @Test
-    public void dietPersistenceTest(){
-        User testUser = new User("TestUser", "TestEmail", "TestPassword");
-        testUser.setId(10L);
-        userRepository.save(testUser);
-        Diet testDiet = new Diet(testUser.getId(), testUser);
-        testDiet.setDailyParams(10,10,10,10);
-        dietRepository.save(testDiet);
-        Assert.assertNotNull(dietRepository.findById(testDiet.getId()).get().getDailyCalories());
-        Assert.assertNotNull(dietRepository.findByUser(testUser).get().getDailyCalories());
-        dietRepository.delete(testDiet);
-        userRepository.delete(testUser);
-    }
+//    @Test
+//    public void dietPersistenceTest(){
+//        User testUser = new User("TestUser", "TestEmail", "TestPassword");
+//        testUser.setId(10L);
+//        userRepository.save(testUser);
+//        Diet testDiet = new Diet(testUser.getId(), testUser);
+//        testDiet.setDailyParams(10,10,10,10);
+//        dietRepository.save(testDiet);
+//        Assert.assertNotNull(dietRepository.findById(testDiet.getId()).get().getDailyCalories());
+//        Assert.assertNotNull(dietRepository.findByUser(testUser).get().getDailyCalories());
+//        dietRepository.delete(testDiet);
+//        userRepository.delete(testUser);
+//    }
 }

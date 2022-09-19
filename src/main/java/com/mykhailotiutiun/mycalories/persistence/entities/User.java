@@ -1,6 +1,8 @@
 package com.mykhailotiutiun.mycalories.persistence.entities;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,8 +26,11 @@ public class User implements UserDetails {
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
-    @Transient
-    @OneToOne(mappedBy = "user")
+
+    @OneToOne
+    private Details details;
+
+    @OneToOne
     @ToString.Exclude
     private Diet diet;
 
@@ -36,6 +41,16 @@ public class User implements UserDetails {
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+
+    public User(Long id, String name, String email, String password, Set<Role> roles, Details details, Diet diet) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+        this.details = details;
+        this.diet = diet;
     }
 
     @Override

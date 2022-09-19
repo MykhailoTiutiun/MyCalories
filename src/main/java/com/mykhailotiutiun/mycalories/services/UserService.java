@@ -21,13 +21,17 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final DietService dietService;
+    private final DetailsService detailsService;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     @Autowired
-    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, DietService dietService, DetailsService detailsService) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.dietService = dietService;
+        this.detailsService = detailsService;
     }
 
     public Optional<User> getUserById(Long id){
@@ -46,9 +50,16 @@ public class UserService implements UserDetailsService {
     }
 
     public void saveUser(User user){
+        userRepository.save(user);
+    }
+
+    public void createUser(User user){
         user.setId(generateId());
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRoles(Set.of(roleRepository.findById(0L).get()));
+        dietService.save(user);
+        detailsService.save(user);
+
         userRepository.save(user);
     }
 
@@ -65,6 +76,7 @@ public class UserService implements UserDetailsService {
         while (userRepository.existsById(generatedId));
         return generatedId;
     }
+
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {

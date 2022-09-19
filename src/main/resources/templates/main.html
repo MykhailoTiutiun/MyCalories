@@ -7,12 +7,12 @@
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
-<body>
+<body style="background-color: lightgray">
 
 <div class="container">
     <h2>Hi <span th:text="${user.name}"></span></h2>
 
-    <div>
+    <divs>
         <div>
             <h4>Calories</h4>
             <div class="progress">
@@ -32,7 +32,7 @@
             <h4>Proteins</h4>
             <div class="progress">
                 <div class="progress-bar active" role="progressbar" aria-valuenow="10" aria-valuemin="0"
-                     aria-valuemax="100" th:style="'width: ' + ${diet.todayProteins}/${diet.dailyProteins}*100 + '%; background-color: lightgray;'">
+                     aria-valuemax="100" th:style="'width: ' + ${diet.todayProteins}/${diet.dailyProteins}*100 + '%; background-color: blanchedalmond;'">
                 </div>
             </div>
             <span>
@@ -72,10 +72,10 @@
                 g
             </span>
         </div>
-    </div>
+    </divs>
 
     <div>
-        <a th:href="@{/}" class="btn btn-lg btn-primary btn-block" style="color: #fff">Profile Settings</a>
+        <a th:href="@{/details/}" class="btn btn-lg btn-primary btn-block" style="color: #fff">Profile Info</a>
     </div>
 
 

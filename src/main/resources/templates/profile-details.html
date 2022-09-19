@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MyCalories</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body style="background-color: lightgray">
+
+<div class="container">
+    <h3><span th:text="${user.name}"></span>'s Profile Info</h3>
+    <div>
+        <form th:action="@{/details/update-main}" method="post" th:object="${details}" class="">
+            <h5>Main</h5>
+            <div class="form-group">
+                <label for="age">Age: </label>
+                <div>
+                    <input class="form-control" id="age" type="number" name="age" th:value="${user.details.age}"
+                           th:field="*{age}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="height">Height: </label>
+                <div>
+                    <input class="form-control" id="height" type="number" name="height"
+                           th:value="${user.details.height}" th:field="*{height}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="weight">Weight: </label>
+                <div>
+                    <input class="form-control" id="weight" type="number" name="weight"
+                           th:value="${user.details.weight}" th:field="*{weight}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="fat">Fat: </label>
+                <div>
+                    <input class="form-control" id="fat" type="number" name="fat" th:value="${user.details.fat}"
+                           th:field="*{fat}">
+                </div>
+            </div>
+            <div th:if="${param.mainError}" class="alert alert-danger">
+                <span>Invalid data</span>
+            </div>
+            <div class="form-group btn-group">
+                <div>
+                    <button class="btn btn-default btn-primary" type="submit">Update</button>
+                </div>
+                <div>
+                    <button class="btn btn-secondary" type="reset">Reset</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <form th:action="@{/details/update-diet}" method="post" th:object="${diet}">
+            <h5>Diet</h5>
+            <div class="form-group">
+                <label for="calories">Daily Calories: </label>
+                <div>
+                    <input class="form-control" id="calories" type="text" name="calories"
+                           th:value="${user.diet.dailyCalories}" th:field="*{dailyCalories}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="proteins">Daily Proteins: </label>
+                <div>
+                    <input class="form-control" id="proteins" type="text" name="proteins"
+                           th:value="${user.diet.dailyProteins}" th:field="*{dailyProteins}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="carbs">Daily Carbs: </label>
+                <div>
+                    <input class="form-control" id="carbs" type="text" name="carbs" th:value="${user.diet.dailyCarbs}"
+                           th:field="*{dailyCarbs}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="fats">Daily Fats: </label>
+                <div>
+                    <input class="form-control" id="fats" type="text" name="fats" th:value="${user.diet.dailyFats}"
+                           th:field="*{dailyFats}">
+                </div>
+            </div>
+            <div th:if="${param.dietError}" class="alert alert-danger">
+                <span>Invalid data</span>
+            </div>
+            <div class="form-group btn-group">
+                <div>
+                    <input class="btn btn-primary" type="submit" name="action" value="Update">
+                </div>
+                <div>
+                    <input class="btn btn-info" type="submit" name="action" value="Calculate">
+                </div>
+                <div>
+                    <button class="btn btn-secondary" type="reset">Reset</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <form th:action="@{/details/change-password}" method="post">
+            <h5>Change Password</h5>
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="old-password">Old Password: </label>
+                    <div>
+                        <input class="form-control" id="old-password" type="password" name="old-password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">New Password: </label>
+                    <div>
+                        <input class="form-control" id="password" type="password" name="password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password-conf">Confirm Password: </label>
+                    <div>
+                        <input class="form-control" id="password-conf" type="password" name="password-conf">
+                    </div>
+                </div>
+                <div th:if="${param.oldPasswordError}" class="alert alert-danger">
+                    <span>Old password isn't valid</span>
+                </div>
+                <div th:if="${param.passwordMatchError}" class="alert alert-danger">
+                    <span>Password aren't match</span>
+                </div>
+                <div class="form-group btn-group">
+                    <div>
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

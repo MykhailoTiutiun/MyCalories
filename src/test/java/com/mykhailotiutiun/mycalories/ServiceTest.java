@@ -19,7 +19,7 @@ public class ServiceTest {
     @Test
     public void userServiceTest(){
         User testUser = new User("TestUser", "TestEmail", "TestPassword");
-        userService.saveUser(testUser);
+        userService.createUser(testUser);
         testUser = userService.getUserByEmail("TestEmail").get();
         Assert.assertNotNull(userService.getUserByEmail("TestEmail").get());
         Assert.assertNotNull(userService.getUserById(testUser.getId()).get());

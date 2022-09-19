@@ -7,7 +7,7 @@
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
-<body>
+<body style="background-color: lightgray">
 
 <div class="container">
     <form class="form-signin" method="post" th:action="@{/sign-in}">
@@ -19,6 +19,9 @@
         <p>
             <label for="password" class="sr-only">Password</label>
             <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
+        </p>
+        <p th:if="${param.error}" class="alert alert-danger">
+            <span>Please check your email and password</span>
         </p>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>

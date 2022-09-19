@@ -1,14 +1,10 @@
 package com.mykhailotiutiun.mycalories.persistence.entities;
 
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -19,17 +15,18 @@ public class Diet {
 
     @Id
     private Long id;
-    @OneToOne
+    @OneToOne(mappedBy = "diet")
+    @Transient
     private User user;
 
-    private Integer dailyCalories;
-    private Integer todayCalories;
-    private Integer dailyProteins;
-    private Integer todayProteins;
-    private Integer dailyCarbs;
-    private Integer todayCarbs;
-    private Integer dailyFats;
-    private Integer todayFats;
+    private Float dailyCalories;
+    private Float todayCalories;
+    private Float dailyProteins;
+    private Float todayProteins;
+    private Float dailyCarbs;
+    private Float todayCarbs;
+    private Float dailyFats;
+    private Float todayFats;
 
     public Diet(){
 
@@ -40,13 +37,27 @@ public class Diet {
         this.user = user;
     }
 
-    public void setDailyParams(Integer dailyCalories, Integer dailyProteins, Integer dailyCarbs, Integer dailyFats){
+    public Diet(Long id, User user, Float dailyCalories, Float todayCalories, Float dailyProteins, Float todayProteins, Float dailyCarbs, Float todayCarbs, Float dailyFats, Float todayFats) {
+        this.id = id;
+        this.user = user;
+        this.dailyCalories = dailyCalories;
+        this.todayCalories = todayCalories;
+        this.dailyProteins = dailyProteins;
+        this.todayProteins = todayProteins;
+        this.dailyCarbs = dailyCarbs;
+        this.todayCarbs = todayCarbs;
+        this.dailyFats = dailyFats;
+        this.todayFats = todayFats;
+    }
+
+
+    public void setDailyParams(Float dailyCalories, Float dailyProteins, Float dailyCarbs, Float dailyFats){
         this.dailyCalories = dailyCalories;
         this.dailyProteins = dailyProteins;
         this.dailyCarbs = dailyCarbs;
         this.dailyFats = dailyFats;
     }
-    public void setTodayParams(Integer dailyCalories, Integer dailyProteins, Integer dailyCarbs, Integer dailyFats){
+    public void setTodayParams(Float dailyCalories, Float dailyProteins, Float dailyCarbs, Float dailyFats){
         this.dailyCalories = dailyCalories;
         this.dailyProteins = dailyProteins;
         this.dailyCarbs = dailyCarbs;
