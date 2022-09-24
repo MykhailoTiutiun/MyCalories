@@ -5,7 +5,9 @@ import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "diet_table")
@@ -27,6 +29,14 @@ public class Diet {
     private Float todayCarbs;
     private Float dailyFats;
     private Float todayFats;
+
+    @OneToMany
+    @ToString.Exclude
+    private Set<Meal> meals = new LinkedHashSet<>();
+
+    public void setMeals(Set<Meal> meals) {
+        this.meals = meals;
+    }
 
     public Diet(){
 

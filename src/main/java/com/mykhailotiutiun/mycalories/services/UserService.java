@@ -57,7 +57,7 @@ public class UserService implements UserDetailsService {
         user.setId(generateId());
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRoles(Set.of(roleRepository.findById(0L).get()));
-        dietService.save(user);
+        dietService.create(user);
         detailsService.save(user);
 
         userRepository.save(user);

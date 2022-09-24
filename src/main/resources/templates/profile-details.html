@@ -5,135 +5,124 @@
     <meta charset="UTF-8">
     <title>MyCalories</title>
     <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body style="background-color: lightgray">
+<body class="bg-dark">
 
-<div class="container">
+<div class="container my-3 p-3 text-light">
     <h3><span th:text="${user.name}"></span>'s Profile Info</h3>
-    <div>
+    <div class="m-3">
         <form th:action="@{/details/update-main}" method="post" th:object="${details}" class="">
-            <h5>Main</h5>
-            <div class="form-group">
+            <h4>Main</h4>
+            <div class="form-group p-2">
                 <label for="age">Age: </label>
                 <div>
                     <input class="form-control" id="age" type="number" name="age" th:value="${user.details.age}"
                            th:field="*{age}">
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group p-2">
                 <label for="height">Height: </label>
                 <div>
                     <input class="form-control" id="height" type="number" name="height"
                            th:value="${user.details.height}" th:field="*{height}">
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group p-2">
                 <label for="weight">Weight: </label>
                 <div>
                     <input class="form-control" id="weight" type="number" name="weight"
                            th:value="${user.details.weight}" th:field="*{weight}">
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group p-2">
                 <label for="fat">Fat: </label>
                 <div>
                     <input class="form-control" id="fat" type="number" name="fat" th:value="${user.details.fat}"
                            th:field="*{fat}">
                 </div>
             </div>
-            <div th:if="${param.mainError}" class="alert alert-danger">
+            <div th:if="${param.mainError}" class="alert alert-danger m-2 p-2">
                 <span>Invalid data</span>
             </div>
-            <div class="form-group btn-group">
-                <div>
-                    <button class="btn btn-default btn-primary" type="submit">Update</button>
-                </div>
-                <div>
+            <div class="btn-group p-2">
+                    <button class="btn btn-primary" type="submit">Update</button>
                     <button class="btn btn-secondary" type="reset">Reset</button>
-                </div>
             </div>
         </form>
     </div>
-    <div>
+    <div class="m-3">
         <form th:action="@{/details/update-diet}" method="post" th:object="${diet}">
-            <h5>Diet</h5>
-            <div class="form-group">
+            <h4>Diet</h4>
+            <div class="form-group p-2">
                 <label for="calories">Daily Calories: </label>
                 <div>
                     <input class="form-control" id="calories" type="text" name="calories"
                            th:value="${user.diet.dailyCalories}" th:field="*{dailyCalories}">
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group p-2">
                 <label for="proteins">Daily Proteins: </label>
                 <div>
                     <input class="form-control" id="proteins" type="text" name="proteins"
                            th:value="${user.diet.dailyProteins}" th:field="*{dailyProteins}">
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group p-2">
                 <label for="carbs">Daily Carbs: </label>
                 <div>
                     <input class="form-control" id="carbs" type="text" name="carbs" th:value="${user.diet.dailyCarbs}"
                            th:field="*{dailyCarbs}">
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group p-2">
                 <label for="fats">Daily Fats: </label>
                 <div>
                     <input class="form-control" id="fats" type="text" name="fats" th:value="${user.diet.dailyFats}"
                            th:field="*{dailyFats}">
                 </div>
             </div>
-            <div th:if="${param.dietError}" class="alert alert-danger">
+            <div th:if="${param.dietError}" class="alert alert-danger m-2 p-2">
                 <span>Invalid data</span>
             </div>
-            <div class="form-group btn-group">
-                <div>
-                    <input class="btn btn-primary" type="submit" name="action" value="Update">
-                </div>
-                <div>
-                    <input class="btn btn-info" type="submit" name="action" value="Calculate">
-                </div>
-                <div>
-                    <button class="btn btn-secondary" type="reset">Reset</button>
-                </div>
+            <div class="btn-group p-2">
+                <input class="btn btn-primary" type="submit" name="action" value="Update">
+                <input class="btn btn-info" type="submit" name="action" value="Calculate">
+                <button class="btn btn-secondary" type="reset">Reset</button>
             </div>
         </form>
     </div>
-    <div>
+    <div class="m-3">
         <form th:action="@{/details/change-password}" method="post">
-            <h5>Change Password</h5>
+            <h4>Change Password</h4>
             <div class="form-group">
-                <div class="form-group">
+                <div class="form-group p-2">
                     <label for="old-password">Old Password: </label>
                     <div>
                         <input class="form-control" id="old-password" type="password" name="old-password">
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group p-2">
                     <label for="password">New Password: </label>
                     <div>
                         <input class="form-control" id="password" type="password" name="password">
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group p-2">
                     <label for="password-conf">Confirm Password: </label>
                     <div>
                         <input class="form-control" id="password-conf" type="password" name="password-conf">
                     </div>
                 </div>
-                <div th:if="${param.oldPasswordError}" class="alert alert-danger">
+                <div th:if="${param.oldPasswordError}" class="alert alert-danger m-2 p-2">
                     <span>Old password isn't valid</span>
                 </div>
-                <div th:if="${param.passwordMatchError}" class="alert alert-danger">
+                <div th:if="${param.passwordMatchError}" class="alert alert-danger m-2 p-2">
                     <span>Password aren't match</span>
                 </div>
-                <div class="form-group btn-group">
-                    <div>
-                        <button class="btn btn-primary" type="submit">Submit</button>
-                    </div>
+                <div class="btn-group p-2">
+                    <button class="btn btn-primary" type="submit">Submit</button>
                 </div>
             </div>
         </form>
