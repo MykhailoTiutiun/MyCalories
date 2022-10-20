@@ -10,10 +10,12 @@
 </head>
 <body class="bg-dark">
 
+<div th:replace="fragments/header :: header"></div>
+
 <div class="container my-3 p-3 text-light">
     <h3><span th:text="${user.name}"></span>'s Profile Info</h3>
     <div class="m-3">
-        <form th:action="@{/details/update-main}" method="post" th:object="${details}" class="">
+        <form th:action="@{/details/update-main}" method="post" th:object="${details}" class="border-bottom p-2 m-2">
             <h4>Main</h4>
             <div class="form-group p-2">
                 <label for="age">Age: </label>
@@ -53,7 +55,7 @@
         </form>
     </div>
     <div class="m-3">
-        <form th:action="@{/details/update-diet}" method="post" th:object="${diet}">
+        <form th:action="@{/details/update-diet}" method="post" th:object="${diet}" class="border-bottom p-2 m-2">
             <h4>Diet</h4>
             <div class="form-group p-2">
                 <label for="calories">Daily Calories: </label>
@@ -94,7 +96,7 @@
         </form>
     </div>
     <div class="m-3">
-        <form th:action="@{/details/change-password}" method="post">
+        <form th:action="@{/details/change-password}" method="post" class="border-bottom p-2 m-2">
             <h4>Change Password</h4>
             <div class="form-group">
                 <div class="form-group p-2">

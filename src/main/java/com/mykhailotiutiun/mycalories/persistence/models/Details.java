@@ -1,4 +1,4 @@
-package com.mykhailotiutiun.mycalories.persistence.entities;
+package com.mykhailotiutiun.mycalories.persistence.models;
 
 import lombok.Getter;
 import lombok.Setter;

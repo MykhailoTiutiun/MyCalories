@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>MyCalories</title>
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body class="bg-dark">
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container text-light my-3">
+  <h3>Create Dish</h3>
+  <form method="post" th:action="@{/dishes/create}" th:object="${newDish}" enctype="multipart/form-data">
+    <div class="form-group m-2 p-2">
+      <label for="name">Name:</label>
+      <div>
+        <input class="form-control" id="name" name="name" th:field="*{name}" type="text">
+      </div>
+    </div>
+    <div class="form-group m-2 p-2">
+      <label for="discription">Discription:</label>
+      <div>
+        <textarea class="form-control" id="discription" name="discription" th:field="*{discription}"></textarea>
+      </div>
+    </div>
+    <div class="row m-2">
+      <div class="col form-group">
+        <label for="calories">Calories per 100g:</label>
+        <div>
+          <input class="form-control" id="calories" name="calories" type="text" th:field="*{calories}">
+        </div>
+      </div>
+      <div class="col form-group">
+        <label for="proteins">Proteins per 100g:</label>
+        <div>
+          <input class="form-control" id="proteins" name="proteins" type="text" th:field="*{proteins}">
+        </div>
+      </div>
+      <div class="col form-group">
+        <label for="carbs">Carbs per 100g:</label>
+        <div>
+          <input class="form-control" id="carbs" name="carbs" type="text" th:field="*{carbs}">
+        </div>
+      </div>
+      <div class="col form-group">
+        <label for="fats">Fats per 100g:</label>
+        <div>
+          <input class="form-control" id="fats" name="fats" type="text" th:field="*{fats}">
+        </div>
+      </div>
+    </div>
+      <div class="form-group m-2 p-2">
+        <label for="photo">Photo:</label>
+        <div>
+          <input class="form-control" id="photo" type="file" name="photo">
+        </div>
+    </div>
+    <div class="btn-group m-2 p-2">
+      <button class="btn btn-primary" type="submit">Submit</button>
+      <button class="btn btn-secondary" type="reset">Reset</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>

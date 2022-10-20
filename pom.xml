@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.mykhailo-tiutiun-apps</groupId>
     <artifactId>MyCalories</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <packaging>war</packaging>
     <name>MyCalories</name>
 
@@ -111,6 +111,10 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+
+                    <profiles>
+                        <profile>dev</profile>
+                    </profiles>
                 </configuration>
             </plugin>
         </plugins>

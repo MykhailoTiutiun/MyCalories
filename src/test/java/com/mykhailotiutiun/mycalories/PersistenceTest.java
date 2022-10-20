@@ -1,8 +1,7 @@
 package com.mykhailotiutiun.mycalories;
 
-import com.mykhailotiutiun.mycalories.persistence.entities.Diet;
-import com.mykhailotiutiun.mycalories.persistence.entities.Role;
-import com.mykhailotiutiun.mycalories.persistence.entities.User;
+import com.mykhailotiutiun.mycalories.persistence.models.Role;
+import com.mykhailotiutiun.mycalories.persistence.models.User;
 import com.mykhailotiutiun.mycalories.persistence.repositories.DietRepository;
 import com.mykhailotiutiun.mycalories.persistence.repositories.RoleRepository;
 import com.mykhailotiutiun.mycalories.persistence.repositories.UserRepository;

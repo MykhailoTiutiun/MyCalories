@@ -1,51 +1,16 @@
 package com.mykhailotiutiun.mycalories.services;
 
-import com.mykhailotiutiun.mycalories.persistence.entities.Diet;
-import com.mykhailotiutiun.mycalories.persistence.entities.Meal;
-import com.mykhailotiutiun.mycalories.persistence.repositories.MealRepository;
-import org.springframework.stereotype.Service;
+import com.mykhailotiutiun.mycalories.persistence.models.Diet;
+import com.mykhailotiutiun.mycalories.persistence.models.Meal;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+public interface MealService {
+    Meal getById(Long id);
 
-@Service
-public class MealService {
+    void save(Meal meal);
 
-    private final MealRepository mealRepository;
-    private final DietService dietService;
+    void saveAndAddToDiet(Meal meal, Diet diet);
 
-    public MealService(MealRepository mealRepository, DietService dietService) {
-        this.mealRepository = mealRepository;
-        this.dietService = dietService;
-    }
+    void delete(Long id);
 
-    public Optional<Meal> getById(Long id){
-        return mealRepository.findById(id);
-    }
-
-    public void save(Meal meal){
-        mealRepository.save(meal);
-    }
-
-    public void saveAndAddToDiet(Meal meal, Diet diet){
-        save(meal);
-        Set<Meal> meals = diet.getMeals();
-        meals.add(meal);
-        diet.setMeals(meals);
-        dietService.save(diet);
-    }
-
-
-    public void delete(Long id){
-        mealRepository.deleteById(id);
-    }
-
-    public void removeAndDelete(Meal meal, Diet diet){
-        Set<Meal> meals = diet.getMeals();
-        meals.remove(meal);
-        diet.setMeals(meals);
-        dietService.save(diet);
-        mealRepository.deleteById(meal.getId());
-    }
+    void removeAndDelete(Meal meal, Diet diet);
 }

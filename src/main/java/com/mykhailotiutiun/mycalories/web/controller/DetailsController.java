@@ -3,9 +3,9 @@ package com.mykhailotiutiun.mycalories.web.controller;
 import com.mykhailotiutiun.mycalories.persistence.dto.DetailsDto;
 import com.mykhailotiutiun.mycalories.persistence.dto.DietDto;
 import com.mykhailotiutiun.mycalories.persistence.dto.DtoConverter;
-import com.mykhailotiutiun.mycalories.persistence.entities.Details;
-import com.mykhailotiutiun.mycalories.persistence.entities.Diet;
-import com.mykhailotiutiun.mycalories.persistence.entities.User;
+import com.mykhailotiutiun.mycalories.persistence.models.Details;
+import com.mykhailotiutiun.mycalories.persistence.models.Diet;
+import com.mykhailotiutiun.mycalories.persistence.models.User;
 import com.mykhailotiutiun.mycalories.services.DetailsService;
 import com.mykhailotiutiun.mycalories.services.DietService;
 import com.mykhailotiutiun.mycalories.services.UserService;
@@ -40,7 +40,7 @@ public class DetailsController {
     @GetMapping("/")
     public String detailsPage(Model model){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        user = userService.getUserById(user.getId()).get();
+        user = userService.getUserById(user.getId());
 
         model.addAttribute("user", DtoConverter.userDtoFromUser(user));
         model.addAttribute("details", DtoConverter.detailsDtoFromDetails(user.getDetails()));
@@ -56,7 +56,7 @@ public class DetailsController {
         }
 
             User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            user = userService.getUserById(user.getId()).get();
+            user = userService.getUserById(user.getId());
 
             Details details = DtoConverter.detailsFromDetailsDto(detailsDto);
             detailsService.setDetailsParams(user.getId(), details.getAge(), details.getHeight(), details.getWeight(), details.getFat());
@@ -66,7 +66,7 @@ public class DetailsController {
     @PostMapping("/update-diet")
     public String updateDiet(@ModelAttribute DietDto dietDto, @ModelAttribute(name = "action") String action, BindingResult result, Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        user = userService.getUserById(user.getId()).get();
+        user = userService.getUserById(user.getId());
 
         if(result.hasErrors()) {
             return "redirect:/details/?dietError=True";
@@ -85,7 +85,7 @@ public class DetailsController {
     @PostMapping("/change-password")
     public String changePassword(@ModelAttribute(name = "old-password") String oldPassword, @ModelAttribute(name = "password") String password, @ModelAttribute(name = "password-conf") String passwordConf){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        user = userService.getUserById(user.getId()).get();
+        user = userService.getUserById(user.getId());
 
         if(!bCryptPasswordEncoder.matches(oldPassword, user.getPassword())){
             return "redirect:/details/?oldPasswordError=True";

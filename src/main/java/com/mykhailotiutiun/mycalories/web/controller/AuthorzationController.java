@@ -41,7 +41,7 @@ public class AuthorzationController {
         } else if (!userDto.getPassword().equals(userDto.getPasswordConfirm())) {
             return "redirect:/sign-up?passwordMatchError";
         }
-        userService.createUser(DtoConverter.userFromUserDto(userDto));
+        userService.createUser(DtoConverter.userFromUserDtoOnCreate(userDto));
         return "redirect:/sign-in";
     }
 

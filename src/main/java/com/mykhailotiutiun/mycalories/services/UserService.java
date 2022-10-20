@@ -1,85 +1,33 @@
 package com.mykhailotiutiun.mycalories.services;
 
-import com.mykhailotiutiun.mycalories.persistence.entities.User;
-import com.mykhailotiutiun.mycalories.persistence.repositories.RoleRepository;
-import com.mykhailotiutiun.mycalories.persistence.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.mykhailotiutiun.mycalories.persistence.models.Dish;
+import com.mykhailotiutiun.mycalories.persistence.models.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.Random;
-import java.util.Set;
 
-@Service
-public class UserService implements UserDetailsService {
+public interface UserService extends UserDetailsService {
+    User getUserById(Long id);
 
-    private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
-    private final DietService dietService;
-    private final DetailsService detailsService;
+    User getUserByEmail(String email);
 
-    private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-
-    @Autowired
-    public UserService(UserRepository userRepository, RoleRepository roleRepository, DietService dietService, DetailsService detailsService) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-        this.dietService = dietService;
-        this.detailsService = detailsService;
-    }
-
-    public Optional<User> getUserById(Long id){
-        return userRepository.findById(id);
-    }
-    public Optional<User> getUserByEmail(String email){
-        return userRepository.findByEmail(email);
-    }
-    public List<User> getAllUsers(){
-        return userRepository.findAll();
-    }
+    List<User> getAllUsers();
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return getUserByEmail(email).get();
-    }
+    UserDetails loadUserByUsername(String email) throws UsernameNotFoundException;
 
-    public void saveUser(User user){
-        userRepository.save(user);
-    }
+    void saveUser(User user);
 
-    public void createUser(User user){
-        user.setId(generateId());
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRoles(Set.of(roleRepository.findById(0L).get()));
-        dietService.create(user);
-        detailsService.save(user);
+    void createUser(User user);
 
-        userRepository.save(user);
-    }
+    void addDishOwned(User user, Dish dish);
 
-    public void deleteById(Long id){
-        userRepository.deleteById(id);
-    }
-
-    private Long generateId(){
-        Long generatedId;
-        Random random = new Random();
-        do {
-            generatedId = random.nextLong(10000000000L, 100000000000L);
-        }
-        while (userRepository.existsById(generatedId));
-        return generatedId;
-    }
-
+    void deleteById(Long id);
 
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return bCryptPasswordEncoder;
-    }
+    BCryptPasswordEncoder bCryptPasswordEncoder();
 }

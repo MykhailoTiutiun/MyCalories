@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+/docker/2. Init Database/
+/docker/MyCalories/.logs/
+/docker/MyCalories/pgadmin/
+/docker/MyCalories/pgdata/
+/docker/MyCalories/queries.yaml/
+/docker/MyCalories/logs/
+/logs/

@@ -1,7 +1,9 @@
 package com.mykhailotiutiun.mycalories.persistence.dto;
 
-import com.mykhailotiutiun.mycalories.persistence.entities.Role;
+import com.mykhailotiutiun.mycalories.persistence.models.Role;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -10,6 +12,8 @@ import java.io.Serializable;
 import java.util.Set;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserDto implements Serializable {
 
     private Long id;
@@ -25,17 +29,8 @@ public class UserDto implements Serializable {
     private DetailsDto details;
 
     private DietDto diet;
+    private Set<DishDto> favoriteDishes;
+    private Set<DishDto> ownedDishes;
 
-    public UserDto() {
-    }
 
-    public UserDto(Long id, String name, String email, String password, Set<Role> roles, DetailsDto details, DietDto diet) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
-        this.details = details;
-        this.diet = diet;
-    }
 }

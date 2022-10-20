@@ -1,6 +1,6 @@
 package com.mykhailotiutiun.mycalories.persistence.dto;
 
-import com.mykhailotiutiun.mycalories.persistence.entities.User;
+import com.mykhailotiutiun.mycalories.persistence.models.User;
 import lombok.Data;
 
 import javax.validation.constraints.Max;

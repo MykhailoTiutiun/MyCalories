@@ -1,4 +1,4 @@
-package com.mykhailotiutiun.mycalories.persistence.entities;
+package com.mykhailotiutiun.mycalories.persistence.models;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -35,6 +35,16 @@ public class User implements UserDetails {
     @ToString.Exclude
     private Diet diet;
 
+    @ManyToMany
+    @Transient
+    @ToString.Exclude
+    private Set<Dish> favoriteDishes = new LinkedHashSet<>();
+
+    @OneToMany
+    @Transient
+    @ToString.Exclude
+    private Set<Dish> ownedDishes = new LinkedHashSet<>();
+
 
     public User() {
     }
@@ -45,7 +55,7 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public User(Long id, String name, String email, String password, Set<Role> roles, Details details, Diet diet) {
+    public User(Long id, String name, String email, String password, Set<Role> roles, Details details, Diet diet, Set<Dish> favoriteDishes, Set<Dish> ownedDishes) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -53,6 +63,8 @@ public class User implements UserDetails {
         this.roles = roles;
         this.details = details;
         this.diet = diet;
+        this.favoriteDishes = favoriteDishes;
+        this.ownedDishes = ownedDishes;
     }
 
     @Override

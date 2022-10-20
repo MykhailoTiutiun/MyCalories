@@ -1,37 +1,14 @@
 package com.mykhailotiutiun.mycalories.services;
 
-import com.mykhailotiutiun.mycalories.persistence.entities.Details;
-import com.mykhailotiutiun.mycalories.persistence.entities.User;
-import com.mykhailotiutiun.mycalories.persistence.repositories.DetailsRepository;
-import org.springframework.stereotype.Service;
+import com.mykhailotiutiun.mycalories.persistence.models.Details;
+import com.mykhailotiutiun.mycalories.persistence.models.User;
 
-import java.util.Optional;
+public interface DetailsService {
+    Details getDetailsById(Long id);
 
-@Service
-public class DetailsService {
+    void save(User user);
 
-    private final DetailsRepository detailsRepository;
+    void setDetailsParams(Long id, Integer age, Integer height, Integer weight, Integer fat);
 
-    public DetailsService(DetailsRepository detailsRepository) {
-        this.detailsRepository = detailsRepository;
-    }
-
-    public Optional<Details> getDetailsById(Long id){
-        return detailsRepository.findById(id);
-    }
-
-    public void save(User user){
-        detailsRepository.save(new Details(user.getId(), user));
-    }
-
-    public void setDetailsParams(Long id, Integer age, Integer height, Integer weight, Integer fat){
-        Details details = detailsRepository.findById(id).get();
-        details.setParams(age, height, weight, fat);
-        detailsRepository.save(details);
-    }
-
-    public void delete(Long id){
-        detailsRepository.deleteById(id);
-    }
-
+    void delete(Long id);
 }

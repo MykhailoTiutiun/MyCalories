@@ -1,4 +1,4 @@
-package com.mykhailotiutiun.mycalories.persistence.entities;
+package com.mykhailotiutiun.mycalories.persistence.models;
 
 import lombok.Getter;
 import lombok.ToString;
@@ -21,14 +21,14 @@ public class Diet {
     @Transient
     private User user;
 
-    private Float dailyCalories;
-    private Float todayCalories;
-    private Float dailyProteins;
-    private Float todayProteins;
-    private Float dailyCarbs;
-    private Float todayCarbs;
-    private Float dailyFats;
-    private Float todayFats;
+    private Float dailyCalories = 0F;
+    private Float todayCalories = 0F;
+    private Float dailyProteins = 0F;
+    private Float todayProteins = 0F;
+    private Float dailyCarbs = 0F;
+    private Float todayCarbs = 0F;
+    private Float dailyFats = 0F;
+    private Float todayFats = 0F;
 
     @OneToMany
     @ToString.Exclude
@@ -67,11 +67,11 @@ public class Diet {
         this.dailyCarbs = dailyCarbs;
         this.dailyFats = dailyFats;
     }
-    public void setTodayParams(Float dailyCalories, Float dailyProteins, Float dailyCarbs, Float dailyFats){
-        this.dailyCalories = dailyCalories;
-        this.dailyProteins = dailyProteins;
-        this.dailyCarbs = dailyCarbs;
-        this.dailyFats = dailyFats;
+    public void setTodayParams(Float todayCalories, Float todayProteins, Float todayCarbs, Float todayFats){
+        this.todayCalories = todayCalories;
+        this.todayProteins = todayProteins;
+        this.todayCarbs = todayCarbs;
+        this.todayFats = todayFats;
     }
 
 

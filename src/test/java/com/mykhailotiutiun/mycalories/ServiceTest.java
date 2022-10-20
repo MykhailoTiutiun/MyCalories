@@ -1,6 +1,6 @@
 package com.mykhailotiutiun.mycalories;
 
-import com.mykhailotiutiun.mycalories.persistence.entities.User;
+import com.mykhailotiutiun.mycalories.persistence.models.User;
 import com.mykhailotiutiun.mycalories.services.UserService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -20,9 +20,9 @@ public class ServiceTest {
     public void userServiceTest(){
         User testUser = new User("TestUser", "TestEmail", "TestPassword");
         userService.createUser(testUser);
-        testUser = userService.getUserByEmail("TestEmail").get();
-        Assert.assertNotNull(userService.getUserByEmail("TestEmail").get());
-        Assert.assertNotNull(userService.getUserById(testUser.getId()).get());
+        testUser = userService.getUserByEmail("TestEmail");
+        Assert.assertNotNull(userService.getUserByEmail("TestEmail"));
+        Assert.assertNotNull(userService.getUserById(testUser.getId()));
 
         User finalTestUser = testUser;
         Assert.assertNotNull(userService.getAllUsers().stream().filter(user -> user.getId().equals(finalTestUser.getId())).toList().get(0));
